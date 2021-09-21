@@ -10,20 +10,31 @@ import java.awt.BasicStroke;
 import javax.swing.Timer;
 import javax.swing.JPanel;
 
+/** Pong Panel class
+ * BIT504 A2
+ * Alex RB
+ * 5038417
+ *
+ */
+
 public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	
 	 private final static Color BACKGROUND_COLOUR = Color.BLACK;
 	 private final static int TIMER_DELAY = 5;
 	
+	 
+	 
 	  public PongPanel() {
-          setBackground(BACKGROUND_COLOUR);
-          Timer timer = new Timer(TIMER_DELAY, this);
+          setBackground(BACKGROUND_COLOUR); // CLass parameter for colour
+          Timer timer = new Timer(TIMER_DELAY, this); // New instance of timer object
           timer.start();
 
       }
 	  
 	  private void update() {
 	  }
+	  
+	  // Method to paint dotted line on panel
 	  
 	  private void paintDottedLine(Graphics g) {
 	      Graphics2D g2d = (Graphics2D) g.create();
@@ -40,6 +51,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	      super.paintComponent(g);
 	      paintDottedLine(g);
 	      
+	      // Painting to screen
 	  }
 
 
@@ -64,7 +76,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		update();
-		repaint();
+		repaint(); // Call repaint to update graphics
 		// TODO Auto-generated method stub
 		
 	}

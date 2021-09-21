@@ -1,6 +1,13 @@
 import java.awt.Color;
 import java.awt.Rectangle;
 
+/** Sprite class for Pong
+ * BIT 504 A2
+ * Alex RB
+ * 5038417
+ */
+ 
+
 
 public class Sprite {
 	
@@ -10,9 +17,12 @@ public class Sprite {
 	 private Color colour;
 	 private int initialXPosition, initialYPosition;
 
-
+	 /** Getters and setters defined below:
+	  *  Set out to keep the sprite within the bounds of the screen
+	  * 
+	  */
 	 
-	 // Getters
+	 // Getters 
 
 	 public int getxPosition() {
 		 return xPosition;
@@ -42,7 +52,7 @@ public class Sprite {
 		 return colour;
 	 }
 	 
-	 public Rectangle getRectangle() {
+	 public Rectangle getRectangle() { // Creating rectangle
          return new Rectangle(getxPosition(), getyPosition(), getWidth(), getHeight());
      }
 	 
@@ -96,12 +106,12 @@ public class Sprite {
 	     	}
 	 }
 	 
-	 public void setInitialPosition(int initialX, int initialY) {
+	 public void setInitialPosition(int initialX, int initialY) { // Setting sprite to initial position on board
 		 initialXPosition = initialX;
 		 initialYPosition = initialY;
 	 }
 	 
-	 public void resetToInitialPosition() {
+	 public void resetToInitialPosition() { // Resetting the sprite
 		 setxPosition(initialXPosition);
 		 setyPosition(initialYPosition);
 	 }
