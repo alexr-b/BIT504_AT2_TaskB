@@ -17,7 +17,7 @@ import java.awt.Color;
        private static final Color BALL_COLOUR = Color.WHITE;
 
        public Ball(int panelWidth, int panelHeight) {
-
+    	   
     	   setWidth(BALL_WIDTH);
            setHeight(BALL_HEIGHT);
            setColour(BALL_COLOUR);
