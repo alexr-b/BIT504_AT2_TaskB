@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -29,6 +30,14 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	 Ball ball;
 	 Paddle paddleOne, paddleTwo;
 	
+	  private final static int POINTS_TO_WIN = 3;
+	  int playerOneScore = 0, playerTwoScore = 0;
+	  Player gameWinner;
+	  
+	  private final static int SCORE_TEXT_X = 100;
+      private final static int SCORE_TEXT_Y = 100;
+      private final static int SCORE_FONT_SIZE = 50;
+      private final static String SCORE_FONT_FAMILY = "Serif";
 
 	
 	 
@@ -54,8 +63,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 
 		      }
 	}
+	  
+	  
+	  
 
-	public void createObjects() { // Creating the ball when game starts
+	  public void createObjects() { // Creating the ball when game starts
 		  ball = new Ball(getWidth(), getHeight());
 		  paddleOne = new Paddle(Player.One, getWidth(), getHeight());
 	      paddleTwo = new Paddle(Player.Two, getWidth(), getHeight());
@@ -76,6 +88,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 		 		moveObject(ball);
 		 		checkWallBounce();
 		 		checkPaddleBounce();
+		 		checkWin();
 		 		break;
 		 }
 		 	case GameOver: {
@@ -90,15 +103,35 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	      obj.setYPosition(obj.getyPosition() + obj.getyVelocity(),getHeight());
 	  }
 	  
+	  private void checkWin() {
+          if(playerOneScore >= POINTS_TO_WIN) {
+              gameWinner = Player.One;
+              gameState = GameState.GameOver;
+          } else if(playerTwoScore >= POINTS_TO_WIN) {
+              gameWinner = Player.Two;
+              gameState = GameState.GameOver;
+          }
+      }
+
+      private void addScore(Player player) {
+          if(player == Player.One) {
+              playerOneScore++;
+          } else if(player == Player.Two) {
+              playerTwoScore++;
+          }
+      }
+	  
 	  private void checkWallBounce() {
 
 	       if(ball.getxPosition() <= 0) {
 	           // Hit left side of screen
 	           ball.setxVelocity(-ball.getxVelocity());
+	           addScore(Player.Two);
 	           resetBall();
 	       } else if(ball.getxPosition() >= getWidth() - ball.getWidth()) {
 	           // Hit right side of screen
 	           ball.setxVelocity(-ball.getxVelocity());
+	           addScore(Player.One);
 	           resetBall();
 	       }
 	       if(ball.getyPosition() <= 0 || ball.getyPosition() >= getHeight() - ball.getHeight()) {
@@ -116,6 +149,19 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	      g.setColor(sprite.getColour());
 	      g.fillRect(sprite.getxPosition(), sprite.getyPosition(), sprite.getWidth(), sprite.getHeight());
 	  }
+	  
+	  
+	  private void paintScores(Graphics g) {
+          Font scoreFont = new Font(SCORE_FONT_FAMILY, Font.BOLD, SCORE_FONT_SIZE);
+          String leftScore = Integer.toString(playerOneScore);
+          String rightScore = Integer.toString(playerTwoScore);
+          g.setFont(scoreFont);
+          g.drawString(leftScore, SCORE_TEXT_X, SCORE_TEXT_Y);
+          g.drawString(rightScore, getWidth()-SCORE_TEXT_X, SCORE_TEXT_Y);
+ 
+     }
+
+ 
 	  
 	  // Method to paint dotted line on panel
 	  
@@ -137,6 +183,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	    	  paintSprite(g, ball);
 	    	  paintSprite(g, paddleOne);
 	    	  paintSprite(g, paddleTwo);
+	    	  paintScores(g);
 	      }
 
 	  }
