@@ -31,7 +31,7 @@ public class Pong extends JFrame{
 
 	public static void main(String[] args) {
 		
-		// Pong instance created
+		// Pong instance created in main class
 		
 				new Pong();
 			

@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 
 /** Sprite class for Pong
