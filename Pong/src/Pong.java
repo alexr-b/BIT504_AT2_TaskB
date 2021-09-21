@@ -24,7 +24,7 @@ public class Pong extends JFrame{
     	setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     	setBackground(BACKGROUND_COLOUR);
     	setResizable(false);
-    	add(new PongPanel());
+    	add(new PongPanel(WINDOW_WIDTH, WINDOW_HEIGHT));
     	setVisible(true);
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}

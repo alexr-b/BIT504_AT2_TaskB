@@ -30,24 +30,24 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	 Ball ball;
 	 Paddle paddleOne, paddleTwo;
 	
-	  private final static int POINTS_TO_WIN = 3;
-	  int playerOneScore = 0, playerTwoScore = 0;
-	  Player gameWinner;
+	 private final static int POINTS_TO_WIN = 3;
+	 int playerOneScore = 0, playerTwoScore = 0;
+	 Player gameWinner;
 	  
-	  private final static int SCORE_TEXT_X = 100;
-      private final static int SCORE_TEXT_Y = 100;
-      private final static int SCORE_FONT_SIZE = 50;
-      private final static String SCORE_FONT_FAMILY = "Serif";
-      
-      private final static int WINNER_TEXT_X = 200;
-      private final static int WINNER_TEXT_Y = 200;
-      private final static int WINNER_FONT_SIZE = 40;
-      private final static String WINNER_FONT_FAMILY = "Serif";
-      private final static String WINNER_TEXT = "WIN!";
-      
+	 private final static int SCORE_TEXT_X = 100;
+     private final static int SCORE_TEXT_Y = 100;
+     private final static int SCORE_FONT_SIZE = 50;
+     private final static String SCORE_FONT_FAMILY = "Forte";
+     private final static int WINNER_TEXT_X = 200;
+     private final static int WINNER_TEXT_Y = 200;
+     private final static int WINNER_FONT_SIZE = 40;
+     private final static String WINNER_FONT_FAMILY = "Forte";
+     private final static String WINNER_TEXT = "WIN!";
+     
 	 
 	 
-	  public PongPanel() {
+	  public PongPanel(int WINDOW_WIDTH, int WINDOW_HEIGHT) {
+		  setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
           setBackground(BACKGROUND_COLOUR); // CLass parameter for colour
           Timer timer = new Timer(TIMER_DELAY, this); // New instance of timer object
           timer.start();
@@ -220,14 +220,14 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent event) {
 		if(event.getKeyCode() == KeyEvent.VK_W) {
-            paddleOne.setyVelocity(-1);
+            paddleOne.setyVelocity(-4);
        } else if(event.getKeyCode() == KeyEvent.VK_S) {
-            paddleOne.setyVelocity(1);
+            paddleOne.setyVelocity(4);
        }
 		if(event.getKeyCode() == KeyEvent.VK_UP) {
-            paddleTwo.setyVelocity(-1);
+            paddleTwo.setyVelocity(-4);
         } else if(event.getKeyCode() == KeyEvent.VK_DOWN) {
-            paddleTwo.setyVelocity(1);
+            paddleTwo.setyVelocity(4);
         }
 		
 	}
