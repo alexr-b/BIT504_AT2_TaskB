@@ -106,7 +106,7 @@ public class Sprite {
 	     	}
 	 }
 	 
-	 public void setInitialPosition(int initialY, int initialX) { // Setting sprite to initial position on board
+	 public void setInitialPosition(int initialX, int initialY) { // Setting sprite to initial position on board
 		 initialXPosition = initialX;
 		 initialYPosition = initialY;
 	 }
