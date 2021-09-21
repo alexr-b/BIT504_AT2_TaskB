@@ -1,4 +1,5 @@
 import java.awt.Color;
+import javax.swing.JFrame;
 
 /** Pong Game Main class
  * BIT 504 A2
@@ -6,7 +7,7 @@ import java.awt.Color;
  * 5038417
  */
 
-import javax.swing.JFrame;
+
 
 public class Pong extends JFrame{
 	
