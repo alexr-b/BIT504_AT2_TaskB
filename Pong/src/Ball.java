@@ -23,7 +23,7 @@ import java.awt.Color;
            
            // Set initial position created by placing ball directly in middle of screen
            
-           setInitialPosition((panelWidth / 2) - (getWidth() / 2), (panelHeight / 2) - (getHeight() / 2));
+           setInitialPosition(panelWidth / 2 - (getWidth() / 2), panelHeight / 2 - (getHeight() / 2));
            resetToInitialPosition();
 
       }
