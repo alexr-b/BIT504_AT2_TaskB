@@ -21,12 +21,14 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	
 	 private final static Color BACKGROUND_COLOUR = Color.BLACK;
 	 private final static int TIMER_DELAY = 5;
+	 private final static int BALL_MOVEMENT_SPEED = 2;
 	 
 	 GameState gameState = GameState.Initialising;
 	 
 	 boolean gameInitialised = false;
 	 Ball ball;
-	 Paddle paddle1, paddle2;
+	 Paddle paddleOne, paddleTwo;
+	
 
 	
 	 
@@ -35,13 +37,28 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
           setBackground(BACKGROUND_COLOUR); // CLass parameter for colour
           Timer timer = new Timer(TIMER_DELAY, this); // New instance of timer object
           timer.start();
+          addKeyListener(this);
+          setFocusable(true);
+      
 
       }
 	  
-	  public void createObjects() { // Creating the ball when game starts
+	  private void checkPaddleBounce() {
+		// TODO Auto-generated method stub
+		   if(ball.getxVelocity() < 0 && ball.getRectangle().intersects(paddleOne.getRectangle())) {
+		          ball.setxVelocity(BALL_MOVEMENT_SPEED);
+		      }
+
+		      if(ball.getxVelocity() > 0 && ball.getRectangle().intersects(paddleTwo.getRectangle())) {
+		          ball.setxVelocity(-BALL_MOVEMENT_SPEED);
+
+		      }
+	}
+
+	public void createObjects() { // Creating the ball when game starts
 		  ball = new Ball(getWidth(), getHeight());
-		  paddle1 = new Paddle(Player.One, getWidth(), getHeight());
-	      paddle2 = new Paddle(Player.Two, getWidth(), getHeight());
+		  paddleOne = new Paddle(Player.One, getWidth(), getHeight());
+	      paddleTwo = new Paddle(Player.Two, getWidth(), getHeight());
 	  }
 	  
 	  private void update() { // Set up of game
@@ -49,15 +66,50 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 		 	case Initialising: {
 			 	createObjects();
 			 	gameState = GameState.Playing;
+			 	ball.setxVelocity(BALL_MOVEMENT_SPEED);
+			 	ball.setyVelocity(BALL_MOVEMENT_SPEED);
 			 	break;
 		 	}
 		 	case Playing: {
+		 		moveObject(paddleOne);
+		 		moveObject(paddleTwo);
+		 		moveObject(ball);
+		 		checkWallBounce();
+		 		checkPaddleBounce();
 		 		break;
 		 }
 		 	case GameOver: {
 		 		break;
 		 }
 		  }
+	  }
+	  
+	  private void moveObject(Sprite obj) {
+
+	      obj.setXPosition(obj.getxPosition() + obj.getxVelocity(),getWidth());
+	      obj.setYPosition(obj.getyPosition() + obj.getyVelocity(),getHeight());
+	  }
+	  
+	  private void checkWallBounce() {
+
+	       if(ball.getxPosition() <= 0) {
+	           // Hit left side of screen
+	           ball.setxVelocity(-ball.getxVelocity());
+	           resetBall();
+	       } else if(ball.getxPosition() >= getWidth() - ball.getWidth()) {
+	           // Hit right side of screen
+	           ball.setxVelocity(-ball.getxVelocity());
+	           resetBall();
+	       }
+	       if(ball.getyPosition() <= 0 || ball.getyPosition() >= getHeight() - ball.getHeight()) {
+	           // Hit top or bottom of screen
+	           ball.setyVelocity(-ball.getyVelocity());
+	       }
+	       
+	  }
+	  
+	  private void resetBall() {
+		  ball.resetToInitialPosition();
 	  }
 	  
 	  private void paintSprite(Graphics g, Sprite sprite) {
@@ -83,8 +135,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	      paintDottedLine(g);
 	      if(gameState != GameState.Initialising) {
 	    	  paintSprite(g, ball);
-	    	  paintSprite(g, paddle1);
-	    	  paintSprite(g, paddle2);
+	    	  paintSprite(g, paddleOne);
+	    	  paintSprite(g, paddleTwo);
 	      }
 
 	  }
@@ -98,14 +150,28 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent event) {
-		// TODO Auto-generated method stub
+		if(event.getKeyCode() == KeyEvent.VK_W) {
+            paddleOne.setyVelocity(-1);
+       } else if(event.getKeyCode() == KeyEvent.VK_S) {
+            paddleOne.setyVelocity(1);
+       }
+		if(event.getKeyCode() == KeyEvent.VK_UP) {
+            paddleTwo.setyVelocity(-1);
+        } else if(event.getKeyCode() == KeyEvent.VK_DOWN) {
+            paddleTwo.setyVelocity(1);
+        }
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent event) {
-		// TODO Auto-generated method stub
-		
+		if(event.getKeyCode() == KeyEvent.VK_W || event.getKeyCode() == KeyEvent.VK_S) {
+            paddleOne.setyVelocity(0);
+		}
+		 if(event.getKeyCode() == KeyEvent.VK_UP || event.getKeyCode() == KeyEvent.VK_DOWN) {
+
+             paddleTwo.setyVelocity(0);
+		 }
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 
 public class Pong extends JFrame{
 	
-	private final static String WINDOW_TITLE = "Pong"; // Window title set to Poing
+	private final static String WINDOW_TITLE = "Pong"; // Window title set to Pong
     private final static int WINDOW_WIDTH = 800; //Window dimension
     private final static int WINDOW_HEIGHT = 600;
     private final static Color BACKGROUND_COLOUR = Color.BLACK; // Background colour of Panel set to black
