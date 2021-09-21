@@ -43,7 +43,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
       private final static int WINNER_TEXT_Y = 200;
       private final static int WINNER_FONT_SIZE = 40;
       private final static String WINNER_FONT_FAMILY = "Forte";
+
+
       private final static String WINNER_TEXT = "WIN!";
+
       
 	 
 	 
