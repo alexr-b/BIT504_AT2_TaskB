@@ -16,7 +16,8 @@ public class Paddle extends Sprite {
        
        
        public Paddle(Player player, int panelWidth, int panelHeight) {
-
+    	   
+    	   // Creating the paddle parameters of width, height, colour
            setWidth(PADDLE_WIDTH);
            setHeight(PADDLE_HEIGHT);
            setColour(PADDLE_COLOUR);

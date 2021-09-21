@@ -42,16 +42,17 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
       private final static int WINNER_TEXT_X = 200;
       private final static int WINNER_TEXT_Y = 200;
       private final static int WINNER_FONT_SIZE = 40;
-      private final static String WINNER_FONT_FAMILY = "Arial";
-      private final static String WINNER_TEXT = "YOU WIN!";
+      private final static String WINNER_FONT_FAMILY = "Forte";
+      private final static String WINNER_TEXT = "WIN!";
       
 	 
 	 
 	  public PongPanel() {
+		  
           setBackground(BACKGROUND_COLOUR); // CLass parameter for colour
           Timer timer = new Timer(TIMER_DELAY, this); // New instance of timer object
-          timer.start();
-          addKeyListener(this);
+          timer.start(); // Starting the timer
+          addKeyListener(this); // Adding the key listener
           setFocusable(true);
       
 
